@@ -136,7 +136,10 @@ extension Magnetic {
         let location = touch.location(in: self)
         
         defer { isDragging = false }
-        guard !isDragging, let node = node(at: location) else { return }
+        guard !isDragging, let node = node(at: location) else {
+          magneticField.falloff = 1.5
+          return
+        }
                 
         if removeNodeOnLongPress && !node.isSelected {
             guard let touchStarted = touchStarted else { return }
